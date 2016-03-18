@@ -1,18 +1,15 @@
 import React from 'react';
 import {Component} from 'react';
-import SearchBar from './search-bar';
+import CreditAlgo from './creditCardValidation/credit-algo-container';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    return (
-      <div>
-        <div className="container">
-          <SearchBar/>
-        </div>
+const App = (props) => {
+  return(
+    <div>
+      <div className="container">
+        <CreditAlgo />
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+export default App;

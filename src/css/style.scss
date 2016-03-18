@@ -5,54 +5,29 @@ Author:		Camden Rudisill
 License: 	MIT License (see LICENSE file)
 ----------------------------------------------- */
 /* Colors */
-$planet-labs-blue: #00a9e9;
-$planet-labs-darkBlue: #1B8FCF;
+$blue: #00a9e9;
+$darkBlue: #1B8FCF;
 
-.red {color: #F15A5A; }
-.orange {color: #F39C11;}
-.yellow {color: #F0C419;}
-.green {color: #4EBA6F;}
-.blue {color: #2D95BF;}
-.purple {color: #955BA5;
+html {
+  background-color: #000;
 }
 body {
   margin: 0;
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
-.header {
+.algo-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: -78px;
-  color: white;
-  height: 180px;
+  align-items: center;
+  margin: 30px;
+  border: 1px solid $blue;
+  border-radius: 2px;
+  background-color: rgba(33, 150, 243, 0.23);
+
   h1 {
-    font-size: 51px;
-    letter-spacing: 9px;
-  }
-}
-.color-output {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 300px;
-  border-radius: 300px;
-  box-shadow: 0 0 45px 7px #2C3191;
-  color: white;
-  text-shadow: 3px 2px 5px black;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 1%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
-    -webkit-filter: blur(5px);
-    z-index: 2;
+    font-weight: 300;
+    color: #fff;
   }
 }
 .form-container {
@@ -76,7 +51,7 @@ body {
   padding-left: 20px;
   background-color: #fff;
   i {
-    color: $planet-labs-darkBlue;
+    color: $darkBlue;
   }
 }
 .form-input {
@@ -88,18 +63,6 @@ body {
   &:focus {
     outline: none;
   }
-}
-.shadow {
-  position: absolute;
-  width: 100%;
-  height: 112%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
-  -webkit-transform: rotateX(90deg) translateZ(-150px);
-  -moz-transform: rotateX(90deg) translateZ(-150px);
-  -ms-transform: rotateX(90deg) translateZ(-150px);
-  -o-transform: rotateX(90deg) translateZ(-150px);
-  transform: rotateX(90deg) translateZ(-150px);
-  z-index: -1;
 }
 
 /* For Mobile Devices */

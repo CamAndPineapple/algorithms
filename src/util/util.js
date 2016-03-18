@@ -16,4 +16,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     searchBarContainer.style.boxShadow = 'none';
   };
 
+  $(window).scroll(function() {
+    var height = $(window).scrollTop();
+
+    if(height > 300) {
+        $('.algo-container').css("background-color","blue");
+    }
+});
+
 });
