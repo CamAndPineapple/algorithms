@@ -7,7 +7,6 @@ License: 	MIT License (see LICENSE file)
 /* Colors */
 $blue: #00a9e9;
 $darkBlue: #1B8FCF;
-
 html {
   background-color: #000;
 }
@@ -24,11 +23,25 @@ body {
   border: 1px solid $blue;
   border-radius: 2px;
   background-color: rgba(33, 150, 243, 0.23);
-
   h1 {
+    margin-bottom: 0px;
     font-weight: 300;
     color: #fff;
   }
+}
+.error-message {
+  margin-bottom: -75px;
+  font-size: 22px;
+  text-align: center;
+}
+.error-text {
+  color: #FF5858;
+}
+.no-error-transparent {
+  color: #072238
+}
+.no-error-show {
+  color: #BDFBBD;
 }
 .form-container {
   display: flex;
@@ -64,7 +77,6 @@ body {
     outline: none;
   }
 }
-
 /* For Mobile Devices */
 @media only screen and (max-width : 480px) {
   .header h1 {
