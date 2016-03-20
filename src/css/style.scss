@@ -10,12 +10,10 @@ $darkBlue: #1B8FCF;
 html {
   background-color: #000;
 }
-
 @font-face {
-    font-family: Kredit;
-    src: url(../fonts/kredit/kredit.ttf);
+  font-family: Kredit;
+  src: url("../fonts/kredit/kredit.ttf");
 }
-
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -30,7 +28,7 @@ body {
   border-radius: 2px;
   background-color: rgba(33, 150, 243, 0.23);
   h1 {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     font-weight: 300;
     color: #fff;
   }
@@ -44,7 +42,7 @@ body {
   color: #FF5858;
 }
 .no-error-transparent {
-  color: #072238
+  color: #072238;
 }
 .no-error-show {
   color: #BDFBBD;
@@ -52,8 +50,8 @@ body {
 .num-text {
   color: #3FEAFF;
 }
-
 .credit-card {
+  position: relative;
   background: url("http://i2.cdn.turner.com/cnnnext/dam/assets/141217171152-generic-cnn-background---dark-full-169.jpg");
   background-size: cover;
   height: 235px;
@@ -61,8 +59,28 @@ body {
   background-color: gray;
   margin-bottom: 50px;
   border-radius: 12px;
+  &:before {
+    content: '';
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    top: 70px;
+    left: 40px;
+    background: url("https://firstnationalnorthfield.com/files/icon-chip.png") no-repeat center;
+    background-size: cover;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    height: 37px;
+    width: 72px;
+    top: 182px;
+    right: 22px;
+    background: url("http://icons.iconarchive.com/icons/designbolts/credit-card-payment/256/Visa-icon.png") no-repeat center;
+    background-size: cover;
+  }
   h1 {
-    padding: 10px 0px 0px 15px;
+    padding: 10px 0 0 15px;
   }
   h2 {
     font-family: Kredit;
@@ -70,8 +88,8 @@ body {
     font-weight: 100;
     text-align: center;
     margin-top: 90px;
+    letter-spacing: 2px;
   }
-
 }
 .form-container {
   display: flex;
