@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
+import CreditCard from './CreditCard.jsx';
+
 // correct number: 4012-8888-8888-1881
+//7768768686876888
+
+
 export default class CreditCardInput extends Component {
   constructor(props) {
     super(props)
@@ -10,12 +15,23 @@ export default class CreditCardInput extends Component {
     }
 
     this.invalidNumber = false;
+    this.isNotANumber = false;
     this.showMessage = false;
+    this.deleteKeyPress = false;
 
     // Take method and bind to class SearchBar, then replace method with
     // newly bound method
     this.onInputChange = this.onInputChange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+  }
+
+  onKeyDown(e) {
+    if (e.nativeEvent.which === 8) {
+      this.deleteKeyPress = true;
+    } else {
+      this.deleteKeyPress = false;
+    };
   }
 
   onInputChange(e) {
@@ -23,10 +39,12 @@ export default class CreditCardInput extends Component {
     //TODO try adding cardNumber to state
 
 
+
     // Update state as you type in the search box
     this.setState({term: e.target.value});
-    if (this.state.term.length === 3 || this.state.term.length === 8 || this.state.term.length === 13 ) {
-      this.setState({term: e.target.value + "-"});
+
+    if (this.state.term.length === 3 || this.state.term.length === 8 || this.state.term.length === 13) {
+      this.deleteKeyPress ? this.setState({term: e.target.value }) : this.setState({term: e.target.value + "-"});
     }
     else if (this.state.term.length === 19 || e.target.value.length === 19) {
       this.onSubmitForm(e.target.value);
@@ -61,12 +79,19 @@ export default class CreditCardInput extends Component {
     var sum;
     var total;
 
-    //TODO make check if number isNAN();
-    // if (isNaN(number)) {
-    //   console.log("Value is not a number!");
-    //   return "value entered is not a number";
-    // };
+    for (var i = 0; i < cardNumber.length; i++) {
+      if (isNaN(cardNumber[i])) {
+        this.invalidNumber = true;
+        this.isNotANumber = true;
+        console.log("yes");
+        return "value entered is not a number";
+      } else {
+        this.isNotANumber = false;
+      };
+    }
 
+ // TODO: if you delete all the numbers in input, don't run reduce
+    // Luhn Algorithm
     for (var i = cardLength - 1; i >= 0; i--) {
       if (i === 15) {
         numbersToAdd.push(0);
@@ -110,18 +135,17 @@ export default class CreditCardInput extends Component {
   render() {
     return (
       <div>
-      <div className="error-message">{this.invalidNumber ? <p className="error-text">Card Number is Incorrect</p> : this.showMessage ? <p className="no-error-show">Card Number is Correct</p> : <p className="no-error-transparent">Card Number is Correct</p> }</div>
+        <CreditCard cardNumber={this.state.term}/>
+      <div className="error-message">{this.invalidNumber ? this.isNotANumber ? <p className="error-text">Please enter <span className="num-text">numbers</span> only </p> : <p className="error-text">Card Number is Incorrect</p> : this.showMessage ? <p className="no-error-show">Card Number is Correct</p> : <p className="no-error-transparent">Card Number is Correct</p> }</div>
       <div className="form-container">
         <form className="form">
           <div className="form-group" id="search-container">
             <i className="fa fa-credit-card"></i>
-            <input className="form-input" id="search-input" maxLength={19} onChange={this.onInputChange} placeholder="4012-8888-8888-1881" value={this.state.term}/>
+            <input className="form-input" id="search-input" maxLength={19} onKeyDown={this.onKeyDown} onChange={this.onInputChange} placeholder="4012-8888-8888-1881" value={this.state.term}/>
           </div>
         </form>
-
       </div>
     </div>
-
     );
   }
 }

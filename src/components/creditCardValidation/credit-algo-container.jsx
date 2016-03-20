@@ -13,6 +13,7 @@ export default class CreditAlgo extends Component {
         <div className="container algo-container" id="test">
           <h1>Credit Card Validator </h1>
           <CreditCardInput />
+          
         </div>
       </div>
     );

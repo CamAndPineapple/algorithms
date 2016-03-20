@@ -10,6 +10,12 @@ $darkBlue: #1B8FCF;
 html {
   background-color: #000;
 }
+
+@font-face {
+    font-family: Kredit;
+    src: url(../fonts/kredit/kredit.ttf);
+}
+
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -42,6 +48,30 @@ body {
 }
 .no-error-show {
   color: #BDFBBD;
+}
+.num-text {
+  color: #3FEAFF;
+}
+
+.credit-card {
+  background: url("http://i2.cdn.turner.com/cnnnext/dam/assets/141217171152-generic-cnn-background---dark-full-169.jpg");
+  background-size: cover;
+  height: 235px;
+  width: 373px;
+  background-color: gray;
+  margin-bottom: 50px;
+  border-radius: 12px;
+  h1 {
+    padding: 10px 0px 0px 15px;
+  }
+  h2 {
+    font-family: Kredit;
+    color: #fff;
+    font-weight: 100;
+    text-align: center;
+    margin-top: 90px;
+  }
+
 }
 .form-container {
   display: flex;
