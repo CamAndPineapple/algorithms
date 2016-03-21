@@ -42,6 +42,10 @@ module.exports = {
           'file?hash=sha512&digest=hex&name=[hash].[ext]',
           'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
         ]
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2))(\?[a-z0-9]+)?$/,
+        loader: 'file-loader'
       }
     ]
   },
