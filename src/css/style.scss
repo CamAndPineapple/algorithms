@@ -8,7 +8,7 @@ License: 	MIT License (see LICENSE file)
 $blue: #00a9e9;
 $darkBlue: #1B8FCF;
 html {
-  background-color: #000;
+  background-image: linear-gradient(#324269 0%, #000000 100%);
 }
 @font-face {
   font-family: Kredit;
@@ -24,9 +24,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 30px;
-  border: 1px solid $blue;
   border-radius: 2px;
-  background-color: rgba(33, 150, 243, 0.23);
   h1 {
     margin-bottom: 0;
     font-weight: 300;
@@ -56,7 +54,6 @@ body {
   background-size: cover;
   height: 235px;
   width: 373px;
-  background-color: gray;
   margin-bottom: 50px;
   border-radius: 12px;
   &:before {
@@ -64,7 +61,7 @@ body {
     position: absolute;
     height: 60px;
     width: 60px;
-    top: 70px;
+    top: 65px;
     left: 40px;
     background: url("https://firstnationalnorthfield.com/files/icon-chip.png") no-repeat center;
     background-size: cover;
@@ -87,7 +84,11 @@ body {
     color: #fff;
     font-weight: 100;
     text-align: center;
-    margin-top: 90px;
+    margin-top: 79px;
+    letter-spacing: 2px;
+  }
+  h3 {
+    font-family: Kredit;
     letter-spacing: 2px;
   }
 }
@@ -100,29 +101,125 @@ body {
 }
 .form {
   display: flex;
-  margin-bottom: 85px;
-  height: 40px;
+  flex-direction: column;
+  label {
+    margin: 5px;
+    color: #fff;
+  }
 }
 .form-group {
+  display: flex;
+  margin: 5px;
+  padding-left: 20px;
   border: 1px solid #B7B7B7;
   border-radius: 4px;
   height: 43px;
-  display: flex;
   align-items: center;
-  padding-left: 20px;
   background-color: #fff;
   i {
     color: $darkBlue;
   }
 }
+.form-group-error {
+  display: flex;
+  margin: 5px;
+  padding-left: 20px;
+  border: 1px solid #B7B7B7;
+  border-radius: 4px;
+  height: 43px;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 20px 5px red;
+  i {
+    color: $darkBlue;
+  }
+}
 .form-input {
-  width: 335px;
+  width: 211px;
   height: 40px;
   padding: 10px;
   font-size: 15px;
   border: none;
   &:focus {
     outline: none;
+  }
+}
+.card-holder-label {
+  position: absolute;
+  color: #867575;
+  font-size: 12px;
+  bottom: 40px;
+  left: 14px;
+}
+.card-holder-text {
+  color: white;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 14px;
+  bottom: -2px;
+  text-transform: uppercase;
+  font-size: 17px;
+}
+.expDate-label {
+  position: absolute;
+  color: #867575;
+  font-size: 12px;
+  bottom: 37px;
+  left: 152px;
+}
+.expMonth-text {
+  color: #fff;
+  position: absolute;
+  left: 201px;
+  bottom: 24px;
+}
+.expYear-text {
+  color: #fff;
+  position: absolute;
+  left: 237px;
+  bottom: 24px;
+}
+.form-select {
+  display: flex;
+  width: 165px;
+  height: 50px;
+  justify-content: space-around;
+  align-items: center;
+}
+.select {
+  position: relative;
+  width: 51px;
+  height: 22px;
+  color: #333333;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  outline: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    padding: 0;
+    border: none;
+    width: 100%;
+    outline: none !important;
+    top: 13px;
+    left: 10px;
+    background: none;
+  }
+  &:after {
+    content: '';
+    border-top: 8px solid #222;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    right: 10px;
+    pointer-events: none;
   }
 }
 /* For Mobile Devices */
