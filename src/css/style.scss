@@ -129,7 +129,7 @@ body {
   height: 43px;
   align-items: center;
   background-color: #fff;
-  box-shadow: 0 0 20px 5px red;
+  box-shadow: 0 0 20px 3px red;
   i {
     color: $darkBlue;
   }
@@ -204,10 +204,11 @@ body {
     position: absolute;
     padding: 0;
     border: none;
+    height: 42px;
     width: 100%;
     outline: none !important;
-    top: 13px;
-    left: 10px;
+    top: 0px;
+    left: 13px;
     background: none;
   }
   &:after {

@@ -44,12 +44,8 @@ export default class CreditCardInput extends Component {
 
     //TODO try adding cardNumber to state
 
-    // Update state as you type in the search box
-    // var nextState = {};
-    //     nextState[e.target.name] = e.target.value;
+    // Update state as you type in input fields
     this.setState({ [e.target.name]: e.target.value });
-
-
 
 
     if (this.state.cardNumber.length === 3 || this.state.cardNumber.length === 8 || this.state.cardNumber.length === 13) {
@@ -57,7 +53,7 @@ export default class CreditCardInput extends Component {
     }
     // If user enters 19 numbers or copy/paste 19 numbers
     // into cardNumber input, submit form
-    else if (this.state.cardNumber.length === 19 || (e.target.name === "cardNumber" && e.target.value.length === 19)) {
+    else if ((this.state.cardNumber.length === 19 && e.target.name === "cardNumber") || (e.target.name === "cardNumber" && e.target.value.length === 19)) {
       this.onSubmitForm(e.target.value);
     } else if (this.state.cardNumber.length < 19) {
       this.showMessage = false;
