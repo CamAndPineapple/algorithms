@@ -40,7 +40,7 @@ body {
   color: #FF5858;
 }
 .no-error-transparent {
-  color: #072238;
+  color: transparent;
 }
 .no-error-show {
   color: #BDFBBD;
@@ -54,7 +54,6 @@ body {
   background-size: cover;
   height: 235px;
   width: 373px;
-  margin-bottom: 50px;
   border-radius: 12px;
   &:before {
     content: '';
@@ -227,9 +226,6 @@ body {
 @media only screen and (max-width : 480px) {
   .header h1 {
     font-size: 27px;
-  }
-  .form-container {
-    margin-top: 70px;
   }
   .form {
     margin-bottom: 50px;

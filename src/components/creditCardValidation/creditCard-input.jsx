@@ -160,7 +160,7 @@ export default class CreditCardInput extends Component {
           <label>Card Holder: </label>
           <div className="form-group">
             <i className="fa fa-user"></i>
-            <input className="form-input" type="text" name="cardHolder" onChange={this.onInputChange} placeholder="Camden Rudisill" value={this.state.cardHolder}/>
+            <input className="form-input" type="text" name="cardHolder" onChange={this.onInputChange} placeholder="Your Name" value={this.state.cardHolder}/>
           </div>
           <label>Expiration Date: </label>
           <div className="form-select">
