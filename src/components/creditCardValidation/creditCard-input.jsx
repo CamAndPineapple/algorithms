@@ -16,8 +16,6 @@ export default class CreditCardInput extends Component {
       isNotANumber: false
     };
 
-
-
     // Replace methods with methods bound to CreditCardInput
     this.onInputChange = this.onInputChange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
@@ -101,7 +99,6 @@ export default class CreditCardInput extends Component {
     for (var i = 0; i < length; i++) {
       if (isNaN(number[i])) {
         this.setState({ isNotANumber: true });
-        return "value entered is not a number";
       } else {
         this.setState({ isNotANumber: false });
         this.setState({ errorMessage: 'clearMessage'});
@@ -141,14 +138,12 @@ export default class CreditCardInput extends Component {
     total = sum + checkSum;
     if (total % 10 === 0) {
       this.setState({ errorMessage: 'showCorrectMessage'});
-      return "Credit card number is valid";
     } else {
       if (this.state.isNotANumber) {
         this.setState({ errorMessage: 'notANumber' });
       } else {
         this.setState({ errorMessage: 'invalidNumber' });
       }
-      return "Credit card number is invalid";
     }
   }
   render() {
