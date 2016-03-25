@@ -11,14 +11,12 @@ export default class CreditCardInput extends Component {
       cardNumber: '',
       cardHolder: '',
       expMonth: '',
-      expYear: ''
+      expYear: '',
+      errorMessage: 'clearMessage',
+      isNotANumber: false
     };
 
-    // Error flags
-    this.invalidNumber = false;
-    this.isNotANumber = false;
-    this.showMessage = false;
-    this.deleteKeyPress = false;
+
 
     // Replace methods with methods bound to CreditCardInput
     this.onInputChange = this.onInputChange.bind(this);
@@ -64,8 +62,9 @@ export default class CreditCardInput extends Component {
     } else if (userEnteredAllNumbers || userPastedAllNumbers) {
       this.onSubmitForm(numInput);
     } else if (numLength < maxLength) {
-      this.showMessage = false;
-      this.invalidNumber = false;
+      this.setState({
+        errorMessage: 'clearMessage'
+      });
     }
   }
 
@@ -101,11 +100,11 @@ export default class CreditCardInput extends Component {
   checkIfTypeNumber(number, length) {
     for (var i = 0; i < length; i++) {
       if (isNaN(number[i])) {
-        this.invalidNumber = true;
-        this.isNotANumber = true;
+        this.setState({ isNotANumber: true });
         return "value entered is not a number";
       } else {
-        this.isNotANumber = false;
+        this.setState({ isNotANumber: false });
+        this.setState({ errorMessage: 'clearMessage'});
       }
     }
   }
@@ -141,15 +140,17 @@ export default class CreditCardInput extends Component {
 
     total = sum + checkSum;
     if (total % 10 === 0) {
-      this.invalidNumber = false;
-      this.showMessage = true;
+      this.setState({ errorMessage: 'showCorrectMessage'});
       return "Credit card number is valid";
     } else {
-      this.invalidNumber = true;
+      if (this.state.isNotANumber) {
+        this.setState({ errorMessage: 'notANumber' });
+      } else {
+        this.setState({ errorMessage: 'invalidNumber' });
+      }
       return "Credit card number is invalid";
     }
   }
-
   render() {
     return (
       <div>
@@ -157,7 +158,15 @@ export default class CreditCardInput extends Component {
                     cardHolder={this.state.cardHolder}
                     expMonth={this.state.expMonth}
                     expYear={this.state.expYear}/>
-        <div className="error-message">{this.invalidNumber ? this.isNotANumber ? <p className="error-text">Please enter <span className="num-text">numbers</span> only</p> : <p className="error-text">Card Number is Incorrect</p> : this.showMessage ? <p className="no-error-show">Card Number is Correct</p> : <p className="no-error-transparent">Card Number is Correct</p>}</div>
+                  <div className="error-message">{(() => {
+                      switch(this.state.errorMessage) {
+                        case 'notANumber': return <p className="error-text">Please enter <span className="num-text">numbers</span> only</p>;
+                        case 'invalidNumber': return <p className="error-text">Card Number is Incorrect</p>;
+                        case 'showCorrectMessage': return <p className="no-error-show">Card Number is Correct</p>;
+                        case 'clearMessage': return <p className="no-error-transparent">Card Number is Correct</p>;
+                      }
+                    })()}
+                  </div>
         <div className="form-container">
           <form className="form">
             <label>Card Number:</label>
