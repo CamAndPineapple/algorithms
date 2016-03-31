@@ -5,13 +5,13 @@ import CreditCard from './CreditCard.jsx';
 //7768768686876888
 
 // TODO: Figure out what you want to do about input highlight when clicked
+// TODO: Change containers to stateless components 
 
 
 export default class CreditCardInput extends Component {
   constructor(props) {
     super(props)
 
-    // set default number and search box text to empty string
     this.state = {
       cardNumber: '',
       cardHolder: '',
@@ -24,14 +24,14 @@ export default class CreditCardInput extends Component {
     this.showMessage = false;
     this.deleteKeyPress = false;
 
-    // Take method and bind to class SearchBar, then replace method with
-    // newly bound method
+    // Replace methods with methods bound to 'this'
     this.onInputChange = this.onInputChange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
   }
 
+  // Check if user presses the delete key
   onKeyDown(e) {
     if (e.nativeEvent.which === 8) {
       this.deleteKeyPress = true;
@@ -42,12 +42,10 @@ export default class CreditCardInput extends Component {
 
   onInputChange(e) {
 
-    //TODO try adding cardNumber to state
-
-    // Update state as you type in input fields
+    // Update state as you type in the input fields
     this.setState({ [e.target.name]: e.target.value });
 
-
+    // Add hyphens to every group of 4 numbers entered
     if (this.state.cardNumber.length === 3 || this.state.cardNumber.length === 8 || this.state.cardNumber.length === 13) {
       this.deleteKeyPress ? this.setState({cardNumber: e.target.value }) : this.setState({cardNumber: e.target.value + "-"});
     }
@@ -67,7 +65,6 @@ export default class CreditCardInput extends Component {
     } else {
       this.setState({ [e.target.name]: e.target.value.slice(2) });
     }
-
   }
 
   onSubmitForm(e) {
@@ -75,6 +72,7 @@ export default class CreditCardInput extends Component {
   }
 
   validateCardNumber(number) {
+
     var numberToArray = number.toString().split('');
 
     var filterOutHyphen = numberToArray.filter(function(char) {
@@ -104,6 +102,7 @@ export default class CreditCardInput extends Component {
     }
 
  // TODO: if you delete all the numbers in input, don't run reduce
+
     // Luhn Algorithm
     for (var i = cardLength - 1; i >= 0; i--) {
       if (i === 15) {
