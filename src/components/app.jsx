@@ -3,12 +3,10 @@ import {Component} from 'react';
 import CreditAlgo from './creditCardValidation/credit-algo-container';
 
 const App = (props) => {
-  return(
-    <div>
+  return (
       <div className="container">
-        <CreditAlgo />
+        <CreditAlgo/>
       </div>
-    </div>
   );
 }
 

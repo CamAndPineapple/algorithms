@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 import CreditCard from './CreditCard.jsx';
 
 // correct number: 4012-8888-8888-1881
-//7768768686876888
-
-// TODO: Figure out what you want to do about input highlight when clicked
-// TODO: Change containers to stateless components 
-
 
 export default class CreditCardInput extends Component {
   constructor(props) {
@@ -19,19 +14,20 @@ export default class CreditCardInput extends Component {
       expYear: ''
     }
 
+    // Error flags
     this.invalidNumber = false;
     this.isNotANumber = false;
     this.showMessage = false;
     this.deleteKeyPress = false;
 
-    // Replace methods with methods bound to 'this'
+    // Replace methods with methods bound to CreditCardInput
     this.onInputChange = this.onInputChange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
   }
 
-  // Check if user presses the delete key
+  // Checks if user presses the delete key
   onKeyDown(e) {
     if (e.nativeEvent.which === 8) {
       this.deleteKeyPress = true;
@@ -42,18 +38,29 @@ export default class CreditCardInput extends Component {
 
   onInputChange(e) {
 
+    var cardNumber = this.state.cardNumber;
+    var numLength = cardNumber.length;
+    var numInput = e.target.value;
+    var inputName = e.target.name;
+
+    const deleteKeyPress = this.deleteKeyPress;
+    const maxLength = 19
+
+    var userEnteredAllNumbers = numLength === maxLength && inputName === "cardNumber";
+    var userPastedAllNumbers = inputName === "cardNumber" && numInput.length === maxLength;
+
     // Update state as you type in the input fields
     this.setState({ [e.target.name]: e.target.value });
 
     // Add hyphens to every group of 4 numbers entered
-    if (this.state.cardNumber.length === 3 || this.state.cardNumber.length === 8 || this.state.cardNumber.length === 13) {
-      this.deleteKeyPress ? this.setState({cardNumber: e.target.value }) : this.setState({cardNumber: e.target.value + "-"});
+    if (numLength === 3 || numLength === 8 || numLength === 13) {
+      this.setState({cardNumber: deleteKeyPress ? numInput : numInput + "-" });
     }
     // If user enters 19 numbers or copy/paste 19 numbers
     // into cardNumber input, submit form
-    else if ((this.state.cardNumber.length === 19 && e.target.name === "cardNumber") || (e.target.name === "cardNumber" && e.target.value.length === 19)) {
-      this.onSubmitForm(e.target.value);
-    } else if (this.state.cardNumber.length < 19) {
+    else if ( userEnteredAllNumbers || userPastedAllNumbers )  {
+      this.onSubmitForm(numInput);
+    } else if (numLength < maxLength) {
       this.showMessage = false;
       this.invalidNumber = false;
     }
@@ -85,13 +92,13 @@ export default class CreditCardInput extends Component {
     });
 
     var checkSum = cardNumber[cardNumber.length - 1];
-    var cardLength = cardNumber.length;
+    var numLength = cardNumber.length;
     var numbersToAdd = [];
     var doubleNumber;
     var sum;
     var total;
 
-    for (var i = 0; i < cardNumber.length; i++) {
+    for (var i = 0; i < numLength; i++) {
       if (isNaN(cardNumber[i])) {
         this.invalidNumber = true;
         this.isNotANumber = true;
@@ -101,10 +108,8 @@ export default class CreditCardInput extends Component {
       };
     }
 
- // TODO: if you delete all the numbers in input, don't run reduce
-
     // Luhn Algorithm
-    for (var i = cardLength - 1; i >= 0; i--) {
+    for (var i = numLength - 1; i >= 0; i--) {
       if (i === 15) {
         numbersToAdd.push(0);
       } else if (i % 2 === 0 && i !== 0) {
@@ -127,18 +132,17 @@ export default class CreditCardInput extends Component {
         numbersToAdd.push(cardNumber[i]);
       }
     }
+
     sum = numbersToAdd.reduce(function(a, b) {
       return a + b;
     });
 
     total = sum + checkSum;
     if (total % 10 === 0) {
-      console.log("Credit card number is valid")
       this.invalidNumber = false;
       this.showMessage = true;
       return "Credit card number is valid";
     } else {
-      console.log("Credit card number is invalid")
       this.invalidNumber = true;
       return "Credit card number is invalid";
     };
