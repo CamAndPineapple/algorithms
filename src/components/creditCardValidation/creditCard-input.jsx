@@ -50,15 +50,14 @@ export default class CreditCardInput extends Component {
     var userPastedAllNumbers = inputName === "cardNumber" && numInput.length === maxLength;
 
     // Update state as you type in the input fields
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({[e.target.name]: e.target.value});
 
     // Add hyphens to every group of 4 numbers entered
     if (numLength === 3 || numLength === 8 || numLength === 13) {
-      this.setState({cardNumber: deleteKeyPress ? numInput : numInput + "-" });
-    }
-    // If user enters 19 numbers or copy/paste 19 numbers
-    // into cardNumber input, submit form
-    else if ( userEnteredAllNumbers || userPastedAllNumbers )  {
+      this.setState({ cardNumber: deleteKeyPress ? numInput : numInput + "-"});
+        // If user enters 19 numbers or copy/paste 19 numbers
+      // into cardNumber input, submit form;
+    } else if (userEnteredAllNumbers || userPastedAllNumbers) {
       this.onSubmitForm(numInput);
     } else if (numLength < maxLength) {
       this.showMessage = false;
@@ -67,15 +66,15 @@ export default class CreditCardInput extends Component {
   }
 
   onSelectChange(e) {
-    if (e.target.name === "expMonth"){
-      this.setState({ [e.target.name]: e.target.value + "/" });
+    if (e.target.name === "expMonth") {
+      this.setState({[e.target.name]: e.target.value + "/"});
     } else {
-      this.setState({ [e.target.name]: e.target.value.slice(2) });
+      this.setState({[e.target.name]: e.target.value.slice(2)});
     }
   }
 
   onSubmitForm(e) {
-      this.validateCardNumber(e);
+    this.validateCardNumber(e);
   }
 
   validateCardNumber(number) {
@@ -151,54 +150,57 @@ export default class CreditCardInput extends Component {
   render() {
     return (
       <div>
-        <CreditCard cardNumber={this.state.cardNumber} cardHolder={this.state.cardHolder} expMonth={this.state.expMonth} expYear={this.state.expYear}/>
-      <div className="error-message">{this.invalidNumber ? this.isNotANumber ? <p className="error-text">Please enter <span className="num-text">numbers</span> only </p> : <p className="error-text">Card Number is Incorrect</p> : this.showMessage ? <p className="no-error-show">Card Number is Correct</p> : <p className="no-error-transparent">Card Number is Correct</p> }</div>
-      <div className="form-container">
-        <form className="form">
-          <label>Card Number: </label>
-          <div className={this.invalidNumber ? "form-group-error" : "form-group"}>
-            <i className="fa fa-credit-card"></i>
-            <input className="form-input" id="search-input" name="cardNumber" maxLength={19} onKeyDown={this.onKeyDown} onChange={this.onInputChange} placeholder="4012-8888-8888-1881" value={this.state.cardNumber}/>
-          </div>
-          <label>Card Holder: </label>
-          <div className="form-group">
-            <i className="fa fa-user"></i>
-            <input className="form-input" type="text" name="cardHolder" onChange={this.onInputChange} placeholder="Your Name" value={this.state.cardHolder}/>
-          </div>
-          <label>Expiration Date: </label>
-          <div className="form-select">
+        <CreditCard cardNumber={this.state.cardNumber}
+                    cardHolder={this.state.cardHolder}
+                    expMonth={this.state.expMonth}
+                    expYear={this.state.expYear}/>
+        <div className="error-message">{this.invalidNumber ? this.isNotANumber ? <p className="error-text">Please enter <span className="num-text">numbers</span>only</p> : <p className="error-text">Card Number is Incorrect</p> : this.showMessage ? <p className="no-error-show">Card Number is Correct</p> : <p className="no-error-transparent">Card Number is Correct</p>}</div>
+        <div className="form-container">
+          <form className="form">
+            <label>Card Number:</label>
+            <div className={this.invalidNumber ? "form-group-error" : "form-group"}>
+              <i className="fa fa-credit-card"></i>
+              <input className="form-input" id="search-input" name="cardNumber" maxLength={19} onKeyDown={this.onKeyDown} onChange={this.onInputChange} placeholder="4012-8888-8888-1881" value={this.state.cardNumber}/>
+            </div>
+            <label>Card Holder:</label>
+            <div className="form-group">
+              <i className="fa fa-user"></i>
+              <input className="form-input" type="text" name="cardHolder" onChange={this.onInputChange} placeholder="Your Name" value={this.state.cardHolder}/>
+            </div>
+            <label>Expiration Date:</label>
+            <div className="form-select">
               <div className="select">
-              <select name="expMonth" onChange={this.onSelectChange}>
-                <option></option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-                <option>05</option>
-                <option>06</option>
-                <option>07</option>
-                <option>08</option>
-                <option>09</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </select>
+                <select name="expMonth" onChange={this.onSelectChange}>
+                  <option></option>
+                  <option>01</option>
+                  <option>02</option>
+                  <option>03</option>
+                  <option>04</option>
+                  <option>05</option>
+                  <option>06</option>
+                  <option>07</option>
+                  <option>08</option>
+                  <option>09</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
               </div>
-              <div className="select" >
-              <select name="expYear" onChange={this.onSelectChange}>
-                <option></option>
-                <option>2016</option>
-                <option>2017</option>
-                <option>2018</option>
-                <option>2019</option>
-                <option>2020</option>
-                <option>2021</option>
-              </select>
+              <div className="select">
+                <select name="expYear" onChange={this.onSelectChange}>
+                  <option></option>
+                  <option>2016</option>
+                  <option>2017</option>
+                  <option>2018</option>
+                  <option>2019</option>
+                  <option>2020</option>
+                  <option>2021</option>
+                </select>
               </div>
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     );
   }
 }
