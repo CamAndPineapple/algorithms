@@ -134,7 +134,7 @@ export default class CreditCardInput extends Component {
 
     sum = numbersToAdd.reduce(function(a, b) {
       return a + b;
-    });
+    }, 0);
 
     total = sum + checkSum;
     if (total % 10 === 0) {
