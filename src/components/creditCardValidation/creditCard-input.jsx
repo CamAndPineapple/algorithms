@@ -34,16 +34,16 @@ export default class CreditCardInput extends Component {
 
   onInputChange(e) {
 
-    var cardNumber = this.state.cardNumber;
-    var numLength = cardNumber.length;
-    var numInput = e.target.value;
-    var inputName = e.target.name;
+    const { cardNumber } = this.state;
+    const numLength = cardNumber.length;
+    const numInput = e.target.value;
+    const inputName = e.target.name;
 
     const deleteKeyPress = this.deleteKeyPress;
     const maxLength = 19;
 
-    var userEnteredAllNumbers = inputName === "cardNumber" &&  numLength === maxLength;
-    var userPastedAllNumbers = inputName === "cardNumber" && numInput.length === maxLength;
+    const userEnteredAllNumbers = inputName === "cardNumber" &&  numLength === maxLength;
+    const userPastedAllNumbers = inputName === "cardNumber" && numInput.length === maxLength;
 
     // Update state as you type in the input fields
     this.setState({
@@ -84,12 +84,12 @@ export default class CreditCardInput extends Component {
 
   validateCardNumber(number) {
 
-    var numberToArray = number.toString().split('');
-    var filterOutHyphen = numberToArray.filter( char => char !== '-');
+    const numberToArray = number.toString().split('');
+    const filterOutHyphen = numberToArray.filter( char => char !== '-');
 
     // convert array of strings to numbers
-    var cardNumber = filterOutHyphen.map( num => Number(num));
-    var numLength = cardNumber.length;
+    const cardNumber = filterOutHyphen.map( num => Number(num));
+    const numLength = cardNumber.length;
 
     this.checkIfTypeNumber(cardNumber, numLength);
     this.luhnAlgorithm(cardNumber, numLength);
@@ -108,8 +108,8 @@ export default class CreditCardInput extends Component {
 
   luhnAlgorithm(number, length) {
 
-    var checkSum = number[number.length - 1];
-    var numbersToAdd = [];
+    const checkSum = number[number.length - 1];
+    const numbersToAdd = [];
     var doubleNumber;
     var sum;
     var total;
