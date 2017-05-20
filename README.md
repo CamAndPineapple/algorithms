@@ -1,3 +1,5 @@
-# Algorithm Examples
+# Credit Card Validator
 
-A website displaying examples of different algorithms
+A credit card validator using the Luhn Algorithm [0]
+
+[0] https://en.wikipedia.org/wiki/Luhn_algorithm
